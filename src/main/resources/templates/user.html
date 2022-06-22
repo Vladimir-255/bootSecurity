@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>user</title>
+</head>
+<body>
+<table style="margin:0 auto 0 auto">
+    <tr>
+        <td>
+            <form th:action="@{/logout}" method="post">
+
+                <button type="submit">Logout</button>
+        </td>
+    </tr>
+    </form>
+</table>
+<div th:block th:object="${user}">
+    <table border="5" cellpadding="10" style="margin:0 auto 0 auto">
+        <tr>
+            <td>Name</td>/
+            <td>
+                <p th:text="${user.name}">Name</p>
+            </td>
+        </tr>
+        <tr>
+            <td>LastName</td>
+            <td>
+                <p th:text="${user.lastName}">SurName</p>
+            </td>
+        </tr>
+        <tr>
+            <td>Age</td>
+            <td>
+                <p th:text="${user.age}">Age</p>
+            </td>
+        </tr>
+        <tr>
+            <td>e-Mail</td>
+            <td>
+                <p th:text="${user.email}">e-mail</p>
+            </td>
+        </tr>
+        <tr>
+            <td>Username</td>
+            <td>
+                <p th:text="${user.username}">e-mail</p>
+            </td>
+        </tr>
+<!--        <a th:href="@{/users/{user_id}/edit(user_id=${curent_user.getId()})}">Edit user</a>-->
+</div>
+</body>
+</html>

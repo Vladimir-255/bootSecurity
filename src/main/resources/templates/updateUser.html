@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/html">
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Create</title>
+</head>
+<body>
+<br>
+<br>
+<table style="margin:0 auto 0 auto">
+    <div th:block th:object="${user}">
+        <form th:method="put" th:action="@{/admin/{id}/update(id=${user.getId()})}" th:object="${user}">
+            <form:hidden path="" id/>
+            <tr>
+                <td><label for="name">Name</label></td>
+                <td><input type="text" th:field="${user.name}" id="name"></td>
+            </tr>
+            <tr>
+
+                <td><label for="surname">Surname</label></td>
+                <td><input type="text" th:field="${user.lastName}" id="surname"></td>
+            </tr>
+            <tr>
+
+                <td><label for="age">Age</label></td>
+                <td><input type="text" th:field="${user.age}" id="age"></td>
+            </tr>
+            <tr>
+
+                <td><label for="email">E-mail</label></td>
+                <td><input type="text" th:field="${user.email}" id="email"></td>
+            </tr>
+            <tr>
+                <td><label for="username">Username</label></td>
+                <td><input type="text" th:field="${user.userName}" id="username"></td>
+            </tr>
+            <tr>
+                <!--                <td><label for="password">Password</label></td>-->
+                <td><input type="hidden" th:field="${user.password}" id="password"></td>
+                <td><input type="text" th:field="${user.roles}" id="roles"></td>
+            </tr>
+            <!--            <tr>-->
+
+            <!--                <td><label for="email">Roles</label></td>-->
+            <!--                <td><input type="text" th:field="${user.getRoles}" id="role"></td>-->
+            <!--            </tr>-->
+
+            <tr>
+
+
+                <td><input type="submit" value="Save"></td>
+
+            </tr>
+</table>
+<br>
+<br>
+<table border="2" cellpadding="10" style="margin:0 auto 0 auto">
+    <tr>
+        <td>Roles</td>
+        <td><a th:text="${user.rolesToString()}"></a></td>
+    </tr>
+</table>
+<br>
+<br>
+<table style="margin:0 auto 0 auto">
+    <tr>
+        <td>
+            <form th:action="@{/admin/addroleadmin}" method="post">
+                <button type="submit">Add role Admin</button>
+            </form>
+        </td>
+        <td>
+            <form th:action="@{/admin/addroleuser}" method="post">
+                <button type="submit">Add role User</button>
+            </form>
+        </td>
+    </tr>
+    <br>
+    <tr>
+        <td>
+            <form th:action="@{/admin/delroleadmin}" method="post">
+                <button type="submit">Del role Admin</button>
+            </form>
+        </td>
+        <td>
+            <form th:action="@{/admin/delroleuser}" method="post">
+                <button type="submit">Del role User</button>
+            </form>
+        </td>
+
+    </tr>
+</table>
+</div>
+</form>
+</body>
+</html>

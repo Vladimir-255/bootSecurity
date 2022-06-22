@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>users</title>
+</head>
+<body>
+<table style="margin:0 auto 0 auto">
+    <tr>
+        <td>
+            <form th:action="@{/logout}" method="post">
+
+                <button type="submit">Logout</button>
+        </td>
+    </tr>
+    </form>
+</table>
+<br>
+<br>
+<br>
+<table border="5" cellpadding="10" style="margin:0 auto 0 auto">
+    <tr>
+        <td><b>Name<b></b></td>
+        <td><b>LastName</b></td>
+        <td><b>Age</b></td>
+        <td><b>e-mail</b></td>
+        <td><b>Username</b></td>
+        <td><b>Roles</b></td>
+        <td><b>Edit</b></td>
+        <td><b>Delete</b></td>
+
+    </tr>
+    <div th:block th:each="user:${users}">
+        <tr>
+            <!--            <a th:text="${user}" th:href="@{/users/{user_id}(user_id=${user.getId()})}"/>-->
+            <td><a th:text="${user.name}"</td>
+            <td><a th:text="${user.lastName}"</td>
+            <td><a th:text="${user.age}"</td>
+            <td><a th:text="${user.email}"></a></td>
+            <td><a th:text="${user.userName}"></a></td>
+            <td><a th:text="${user.rolesToString()}"></a></td>
+
+            <td><a th:href="@{/admin/{user_id}/edit(user_id=${user.getId()})}">Edit</a></td>
+            <td><a th:href="@{/admin/{user_id}/delete(user_id=${user.getId()})}">Delete</a></td>
+
+        </tr>
+    </div>
+</table>
+<br>
+<table style="margin:0 auto 0 auto">
+    <tr>
+        <td><input type="button" value="Add user" onclick="window.location.href = 'admin/adduser'"/></td>
+    </tr>
+
+
+</body>
+</html>
