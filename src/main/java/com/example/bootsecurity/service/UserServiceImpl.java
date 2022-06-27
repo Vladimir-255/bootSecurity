@@ -17,17 +17,17 @@ import java.util.Set;
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
-
-
     private UserRepository userRepository;
-    private RoleRepository roleRepository;
-    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(4);
-
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository) {
+    public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
+
+    @Autowired
+    public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
     }
 
     @Override
@@ -37,25 +37,7 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
-    @Override
-    public void addRoleByUsername(String username, Role role) {
-        User user = userRepository.findByUserName(username);
-        user.getRoles().add(role);
-    }
 
-    @Override
-    public void deleteRole(String username, String nameRole) {
-        User user = userRepository.findByUserName(username);
-        Role role = roleRepository.findRoleByRole(nameRole);
-        user.getRoles().remove(role);
-    }
-
-    @Override
-    public Set<Role> getAllRoles(String username) {
-        User user = userRepository.findByUserName(username);
-        Set<Role> roleList = user.getRoles();
-        return roleList;
-    }
 
     @Override
     public List<User> getAllUsers() {
@@ -81,10 +63,6 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    @Override
-    public Role findRoleByRole(String nameRole) {
-        return roleRepository.findRoleByRole(nameRole);
-    }
 
     @Override
     public User findByUserName(String username) {
@@ -93,8 +71,4 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    @Override
-    public Role findRoleById(long id) {
-        return roleRepository.findRoleById(id);
-    }
 }

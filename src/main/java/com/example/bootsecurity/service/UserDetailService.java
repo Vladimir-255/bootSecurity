@@ -1,5 +1,6 @@
 package com.example.bootsecurity.service;
 
+import com.example.bootsecurity.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -10,16 +11,13 @@ import org.springframework.stereotype.Service;
 public class UserDetailService implements UserDetailsService {
 
 
-    private UserService userService;
+    private UserRepository userRepository;
 
     @Autowired
-    public void setUserService(UserService userService) {
-        this.userService = userService;
-    }
-
-
-    @Override
+    public UserDetailService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }@Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userService.findByUserName(username);
+        return userRepository.findByUserName(username);
     }
 }
