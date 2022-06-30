@@ -1,0 +1,18 @@
+function postUser(){
+    const formCreate = new FormData(document.getElementById("formCreateUser"))
+    let createUserData = {roles:[]}
+    formCreate.forEach((value, key) => {
+        if(value==="ADMIN"){
+            createUserData.roles.push(value)
+        }else if(value==="USER"){
+            createUserData.roles.push(value)
+        }else {
+            createUserData[key]=value}
+    })
+    fetch("http://localhost:8080/admin/api/users/",{
+        method: 'POST',
+        body: JSON.stringify(createUserData),
+        headers: {'Content-type': 'application/json; charset=UTF-8'}
+    })
+        .then(response => adminPaneler())
+}

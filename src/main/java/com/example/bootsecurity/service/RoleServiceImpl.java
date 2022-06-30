@@ -32,7 +32,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public void addRoleByUsername(String username, Role role) {
-        User user = userRepository.findByUserName(username);
+        User user = userRepository.findByUsername(username);
         user.getRoles().add(role);
     }
 
@@ -45,7 +45,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public void deleteRole(String username, String nameRole) {
-        User user = userRepository.findByUserName(username);
+        User user = userRepository.findByUsername(username);
         Role role = roleRepository.findRoleByRole(nameRole);
         user.getRoles().remove(role);
     }

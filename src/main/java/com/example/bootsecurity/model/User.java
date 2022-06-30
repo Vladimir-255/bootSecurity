@@ -24,7 +24,7 @@ public class User implements UserDetails {
     @Column
     private String email;
     @Column(unique = true, name = "username")
-    private String userName;
+    private String username;
     @Column(length = 1000)
     private String password;
     //    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
@@ -38,12 +38,22 @@ public class User implements UserDetails {
 
     public User() {
     }
-    public User(String name, String lastName, int age, String email, String userName, String password) {
+    public User(String name, String lastName, int age, String email, String username, String password) {
         this.name = name;
         this.lastName = lastName;
         this.age = age;
         this.email = email;
-        this.userName = userName;
+        this.username = username;
+        this.password = password;
+    }
+
+    public User(Long id, String name, String lastName, int age, String email, String username, String password) {
+        this.id = id;
+        this.name = name;
+        this.lastName = lastName;
+        this.age = age;
+        this.email = email;
+        this.username = username;
         this.password = password;
     }
 
@@ -87,12 +97,8 @@ public class User implements UserDetails {
         this.email = email;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void setPassword(String password) {
@@ -115,13 +121,13 @@ public class User implements UserDetails {
                 ", lastName='" + lastName + '\'' +
                 ", age=" + age +
                 ", email='" + email + '\'' +
-                ", userName='" + userName + '\'' +
+                ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", roles=" + roles +
                 '}';
     }
 
-    public String rolesToString() {
+    public String getrolesToString() {
         String rolesss = "";
         for (Role role : this.getRoles()) {
             rolesss += role.getRole() + " ";
@@ -140,7 +146,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return userName;
+        return username;
     }
 
     @Override

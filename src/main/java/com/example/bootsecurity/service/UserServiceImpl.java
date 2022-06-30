@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getByID(long id) {
         //return userDao.getByID(id);
-        return userRepository.getById(id);
+        return userRepository.findUserById(id);
     }
 
     @Override
@@ -67,7 +67,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByUserName(String username) {
         // return userDao.findByUserName(username);
-        return userRepository.findByUserName(username);
+        return userRepository.findByUsername(username);
 
     }
 

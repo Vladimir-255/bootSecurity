@@ -16,42 +16,13 @@ import java.security.Principal;
 import java.util.HashSet;
 import java.util.Set;
 
-@RestController
+@Controller
 @RequestMapping(value = "/user")
 public class UserController {
-    private UserService userService;
-
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
-
 
     @GetMapping(value = "/")
-    public String findUser(Model model, Principal principal) {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        model.addAttribute("user", user);
+    public String findUser() {
         return "user";
     }
 
-    @GetMapping(value = "/edit")
-    public String editUser(Model model, Principal principal) {
-        model.addAttribute("update_user", userService.findByUserName(principal.getName()));
-        return "update_user";
-    }
-
-    @PutMapping(value = "/update")
-    public String updateUser(@ModelAttribute("user") User user) {
-        userService.updateUser(user);
-        return "redirect:/user/";
-    }
-
-
-//       @GetMapping(value = "")
-//    public String findUser(Model model, Principal principal) {
-//        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        model.addAttribute("user", user);
-//        return "user";
-//    }
 }
-
-
